@@ -1,0 +1,11 @@
+{
+    "login": {
+        "username": "test2@fake.com",
+        "password": "myNewPassword",
+        "incorrectusername": "testinccorectuser",
+        "incorrectpassword": "testinccorectuser"
+    },
+    "api": {
+        
+    }
+}
