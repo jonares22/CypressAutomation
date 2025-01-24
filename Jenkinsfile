@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo 'test echo'
+                sh './run_cypress.sh'
             }
         }
     }
