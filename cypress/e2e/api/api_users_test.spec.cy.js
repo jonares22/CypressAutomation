@@ -33,7 +33,7 @@ describe("Verify CRUD functionality of API",{ tags: ['@api', '@regression'] }, (
 
         usersAPIObj.postAddUser(authToken, userInfo).then((response) => {
 
-            expect(response.status).to.eql(203);
+            expect(response.status).to.eql(201);
             expect(response.body).to.include.keys('user','token');
 
         });

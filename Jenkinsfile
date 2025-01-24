@@ -4,7 +4,7 @@ pipeline {
         nodejs "node"
     }
     parameters {
-        choice(name: 'type', choices: ['ui', 'api', 'regression'], description: 'Select testing type')
+        choice(name: 'type', choices: ['ui', 'api', 'regression'], description: 'Select testing type', defaultValue: 'regression'))
     }
     stages {
         stage('execute test cases') {
