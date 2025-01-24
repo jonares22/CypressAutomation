@@ -8,7 +8,7 @@ ls
 
 # Install dependencies, uncomment when in pipeline
 echo "****************** Installing node dependencies ******************"
-# npm install
+npm install
 
 echo "****************** Executing test cases for $type ******************"
 
