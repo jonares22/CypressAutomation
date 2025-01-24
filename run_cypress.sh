@@ -11,7 +11,7 @@ echo "****************** Installing node dependencies ******************"
 # npm install
 
 echo "****************** Executing test cases for $type ******************"
-echo "type type $type"
+
 if [ -z "$type" ]; then
     echo "No test type selected"
 elif [ "$type" = "ui" ]; then
