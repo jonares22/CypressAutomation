@@ -11,8 +11,8 @@
     "allure:generate": "allure generate --clean --single-file reports/allure/allure-results -o reports/allure/allure-reports ",
     "allure:open": "allure open reports/allure/allure-reports",
     "allure:clean": "rimraf reports/allure/allure-results",
-    "test:api": "npm run allure:clean && cypress run --env grepTags=@api && npm run allure:generate",
-    "test:ui": "npm run allure:clean && cypress run --env grepTags=@ui && npm run allure:generate",
-    "test:regression": "npm run allure:clean && cypress run --env grepTags=@regression && npm run allure:generate"
+    "test:api": "npm run allure:clean && cypress run --env grepTags=@api",
+    "test:ui": "npm run allure:clean && cypress run --env grepTags=@ui",
+    "test:regression": "npm run allure:clean && cypress run --env grepTags=@regression"
   }
 }

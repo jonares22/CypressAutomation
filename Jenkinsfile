@@ -3,10 +3,13 @@ pipeline {
     tools {
         nodejs "node"
     }
+    parameters {
+        choice(name: 'type', choices: ['ui', 'api', 'regression'], description: 'Select testing type')
+    }
     stages {
         stage('execute test cases') {
             steps {
-                sh './run_cypress.sh'
+                sh './run_cypress.sh $params.type'
             }
         }
     }
