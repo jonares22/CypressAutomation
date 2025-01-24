@@ -3,7 +3,7 @@
 ls
 
 # Install dependencies, uncomment when in pipeline
-# npm install
+npm install
 
 # Run Cypress tests
 npm run test:regression
