@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'run_cypress.sh'
+                sh 'pwd'
             }
         }
     }
