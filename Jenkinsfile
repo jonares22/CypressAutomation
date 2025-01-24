@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('execute test cases') {
             steps {
-                sh './run_cypress.sh $params.type'
+                sh './run_cypress.sh ${params.type}'
             }
         }
     }
