@@ -13,6 +13,7 @@ pipeline {
     
     post {
         always {
+            echo 'generating allure report'
             sh 'npm run allure:generate'
         }
     }
