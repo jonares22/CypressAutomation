@@ -1,6 +1,7 @@
 import loginPage from "../page_objects/web/loginPage"
 import contactListPage from "../page_objects/web/contactListPage";
 import usersAPI from "../page_objects/api/usersAPI";
+import contactsAPI from "../page_objects/api/contactsAPI";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -76,6 +77,18 @@ Cypress.Commands.add('addUser', function(authToken, userInformation) {
     const userAPIObj = new usersAPI();
 
     userAPIObj.postAddUser(authToken, userInformation).then(function(response){
+
+        expect(response.status).to.eql(201);
+
+    })
+
+})
+
+Cypress.Commands.add('addContact', function(authToken, contactInformation) {
+
+    const contactAPIObj = new contactsAPI();
+
+    contactAPIObj.postAddContact(authToken, contactInformation).then(function(response){
 
         expect(response.status).to.eql(201);
 

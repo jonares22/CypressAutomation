@@ -4,7 +4,8 @@ class loginPage {
         usernameInput: () => cy.get('#email'),
         passwordInput: () => cy.get('#password'),
         submitBtn: () => cy.get('#submit'),
-        loginErrorMessage: () => cy.get('#error')
+        loginErrorMessage: () => cy.get('#error'),
+        logoutBtn: () => cy.get('logout')
     }
 
     
@@ -27,6 +28,12 @@ class loginPage {
     verifyLoginErrorMessage(){
         this.elements.loginErrorMessage().should('have.text','Incorrect username or password');
     }
+
+    verifyLoginPage() {
+        this.elements.usernameInput().should('be.visible');
+    }
+
+
 
 }
 

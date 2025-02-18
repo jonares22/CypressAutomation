@@ -3,7 +3,9 @@ class contactListPage {
     elements = {
 
         contactListHeader: () => cy.get('header > h1'),
-        addContactBtn: () => cy.get('#add-contact')
+        addContactBtn: () => cy.get('#add-contact'),
+        logoutBtn: () => cy.get('#logout'),
+        contactTable: () => cy.get('#myTable'),
 
     }
 
@@ -13,6 +15,21 @@ class contactListPage {
 
     clickAddNewContactButton() {
         this.elements.addContactBtn().click();
+    }
+
+    clickLogoutButton() {
+        this.elements.logoutBtn().click();
+    }
+
+    verifyAddedContactByEmail(email) {
+        this.elements.contactTable()
+            .find('td')
+            .contains('td', email, {matchCase: false}).should('exist');
+    }
+
+    clickRowByName(name) {
+        this.elements.contactTable().contains('td', name)
+            .parents('tr').click();
     }
 
 }
