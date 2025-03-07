@@ -1,16 +1,8 @@
-import contactListPage from "../../page_objects/web/contactListPage";
-import loginPage from "../../page_objects/web/loginPage";
-import addContactPage from "../../page_objects/web/addContactPage";
+import { loginPage, contactListPage, addContactPage, contactDetailsPage } from "../../pages";
 import userUtil from "../../util/userUtil";
 import contactUtils from "../../util/contactUtils";
-import contactDetailsPage from "../../page_objects/web/contactDetailsPage";
 
 describe('Verify the Contacts CRUD functionality',{ tags: ['@ui', '@regression'] }, () => {
-
-    const contactObj = new contactListPage();
-    const loginObj = new loginPage();
-    const addcontactObj = new addContactPage();
-    const contactdetailsObj = new contactDetailsPage();
 
     beforeEach(() => {
         cy.login();
@@ -23,31 +15,32 @@ describe('Verify the Contacts CRUD functionality',{ tags: ['@ui', '@regression']
         var userInfo = userObj.generateUserInformation();
         var email = userInfo.email;
 
-        contactObj.clickAddNewContactButton();
-        addcontactObj.enterFirstName(userInfo.firstName);
-        addcontactObj.enterLastName(userInfo.lastName);
-        addcontactObj.enterEmailAddress(email);
-        addcontactObj.clickSubmitButton();
-        contactObj.verifyAddedContactByEmail(email);
+        contactListPage.clickAddNewContactButton();
+        addContactPage.enterFirstName(userInfo.firstName);
+        addContactPage.enterLastName(userInfo.lastName);
+        addContactPage.enterEmailAddress(email);
+        cy.screenshot();
+        addContactPage.clickSubmitButton();
+        contactListPage.verifyAddedContactByEmail(email);
 
     })
 
     it('Verify if user is able to successfully logout', function() {
     
-        contactObj.clickLogoutButton();
-        loginObj.verifyLoginPage();
+        contactListPage.clickLogoutButton();
+        loginPage.verifyLoginPage();
 
     })
 
-    it('Verify if user is able to view the Contact Details', function() {
+    it('Verify if user is able to view the Contact Details', { tags: ['@current'] } ,function() {
 
         const contactsUtilObj = new contactUtils();
         let contactInfo = contactsUtilObj.generateContactInformation();
         let token = Cypress.env('authToken');
         cy.addContact(token,contactInfo);
         cy.reload();
-        contactObj.clickRowByName(contactInfo.firstName);
-        contactdetailsObj.verifyContactDetailsInformation(contactInfo);
+        contactListPage.clickRowByName(contactInfo.firstName);
+        contactDetailsPage.verifyContactDetailsInformation(contactInfo);
 
     })
 

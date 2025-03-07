@@ -1,11 +1,8 @@
-import loginPage from "../../page_objects/web/loginPage";
-import contactListPage from "../../page_objects/web/contactListPage";
+import { loginPage, contactListPage } from '../../pages';
 import userUtil from "../../util/userUtil";
 
 describe('This is to verify the Login Functionality',{ tags: ['@ui', '@regression'] }, function() {
 
-    const loginObj = new loginPage();
-    const contactlistObj = new contactListPage();
     const userUtilObj = new userUtil();
 
     beforeEach( function() {
@@ -18,29 +15,29 @@ describe('This is to verify the Login Functionality',{ tags: ['@ui', '@regressio
 
     })
 
-    it('Verify if user is able to login with correct username and password', function() {
+    it('Verify if user is able to login with correct username and password', { tags: ['@current'] }, function() {
 
         cy.step('Enter username and password then click login');
-        loginObj.enterUsername(this.loginData.username);
-        loginObj.enterPassword(this.loginData.password);
-        loginObj.clickSubmitButton();
+        loginPage.enterUsername(this.loginData.username);
+        loginPage.enterPassword(this.loginData.password);
+        loginPage.clickSubmitButton();
         cy.step('Verify if user is able to successfully logged-in');
-        contactlistObj.verifyContactListPage();
+        contactListPage.verifyContactListPage();
 
     })
 
     it('Verify if user is NOT able to login with incorrect username and password', function() {
 
        cy.step('Enter username and password then click login');
-       loginObj.enterUsername(this.loginData.incorrectusername);
-       loginObj.enterPassword(this.loginData.incorrectpassword);
-       loginObj.clickSubmitButton();
+       loginPage.enterUsername(this.loginData.incorrectusername);
+       loginPage.enterPassword(this.loginData.incorrectpassword);
+       loginPage.clickSubmitButton();
        cy.step('Verify if user is unable to login and error message is displayed');
-       loginObj.verifyLoginErrorMessage();
+       loginPage.verifyLoginErrorMessage();
 
     })
 
-    it('Verify if newly created user via API is able to login', function() {
+    it('Verify if newly created user via API is able to login', { tags: ['@now'] } , function() {
 
         cy.step('Generate User Information');
         let userInfo = userUtilObj.generateUserInformation();

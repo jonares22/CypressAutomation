@@ -1,11 +1,9 @@
-import usersAPI from "../../page_objects/api/usersAPI";
+import { usersAPI } from "../../pages";
 import userUtil from "../../util/userUtil";
 
 
 describe("Verify CRUD functionality of API",{ tags: ['@api', '@regression'] }, ()=> {
 
-    
-    const usersAPIObj = new usersAPI();
     const usersObj = new userUtil();
     var authToken;
 
@@ -18,7 +16,7 @@ describe("Verify CRUD functionality of API",{ tags: ['@api', '@regression'] }, (
 
     it('Verify if API is able to return the profile information', function(){
  
-        usersAPIObj.getUserProfile(authToken).then((response) => {
+        usersAPI.getUserProfile(authToken).then((response) => {
 
             expect(response.status).to.eql(200);
             expect(response.body).to.include.keys('firstName', 'lastName', 'email');
@@ -31,7 +29,7 @@ describe("Verify CRUD functionality of API",{ tags: ['@api', '@regression'] }, (
 
         let userInfo = usersObj.generateUserInformation();
 
-        usersAPIObj.postAddUser(authToken, userInfo).then((response) => {
+        usersAPI.postAddUser(authToken, userInfo).then((response) => {
 
             expect(response.status).to.eql(201);
             expect(response.body).to.include.keys('user','token');

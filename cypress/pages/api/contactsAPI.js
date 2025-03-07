@@ -1,4 +1,5 @@
-class contactsAPI {
+
+export const contactsAPI = new class contactsAPI{
 
     postAddContact(auth, contact_info){
 
@@ -31,5 +32,3 @@ class contactsAPI {
 
 
 }
-
-export default contactsAPI;

@@ -19,3 +19,9 @@ import "allure-cypress";
 import 'cypress-plugin-steps'
 import registerCypressGrep from '@cypress/grep/src/support'
 registerCypressGrep()
+
+afterEach(() => {
+
+    cy.screenshot();
+
+})

@@ -1,7 +1,4 @@
-import loginPage from "../page_objects/web/loginPage"
-import contactListPage from "../page_objects/web/contactListPage";
-import usersAPI from "../page_objects/api/usersAPI";
-import contactsAPI from "../page_objects/api/contactsAPI";
+import { loginPage, contactListPage, usersAPI, contactsAPI } from "../pages";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -30,8 +27,6 @@ import contactsAPI from "../page_objects/api/contactsAPI";
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('login', function(username, password) {
-    const loginObj = new loginPage();
-    const contactObj = new contactListPage();
 
     cy.fixture('testdata').then(function(userData){
 
@@ -41,18 +36,16 @@ Cypress.Commands.add('login', function(username, password) {
         }
 
         cy.visit('/');
-        loginObj.enterUsername(username);
-        loginObj.enterPassword(password);
-        loginObj.clickSubmitButton();
-        contactObj.verifyContactListPage();
+        loginPage.enterUsername(username);
+        loginPage.enterPassword(password);
+        loginPage.clickSubmitButton();
+        contactListPage.verifyContactListPage();
 
     })
     
 })
 
 Cypress.Commands.add('apiLogin', function(username, password){
-
-    const apiloginobj = new usersAPI();
 
     return cy.fixture('testdata').then((userData) => {
 
@@ -63,7 +56,7 @@ Cypress.Commands.add('apiLogin', function(username, password){
   
     }).then(function(){
 
-        apiloginobj.postLogin(username,password).then((response)=> {
+        usersAPI.postLogin(username,password).then((response)=> {
 
             Cypress.env('authToken', response.body.token);
 
@@ -74,9 +67,7 @@ Cypress.Commands.add('apiLogin', function(username, password){
 
 Cypress.Commands.add('addUser', function(authToken, userInformation) {
 
-    const userAPIObj = new usersAPI();
-
-    userAPIObj.postAddUser(authToken, userInformation).then(function(response){
+    usersAPI.postAddUser(authToken, userInformation).then(function(response){
 
         expect(response.status).to.eql(201);
 
@@ -86,9 +77,7 @@ Cypress.Commands.add('addUser', function(authToken, userInformation) {
 
 Cypress.Commands.add('addContact', function(authToken, contactInformation) {
 
-    const contactAPIObj = new contactsAPI();
-
-    contactAPIObj.postAddContact(authToken, contactInformation).then(function(response){
+    contactsAPI.postAddContact(authToken, contactInformation).then(function(response){
 
         expect(response.status).to.eql(201);
 
